@@ -1,0 +1,14 @@
+name := "kafka-sbt"
+
+version := "0.1"
+
+scalaVersion := "2.12.10"
+
+libraryDependencies ++= Seq(
+  "org.apache.kafka" % "kafka-clients" % "2.7.0",
+  "org.apache.spark" %% "spark-core" % "3.0.0"
+)
+
+name := "kafka-scala"
+organization := "yuyatinnefeld-scala"
+version := "1.0"

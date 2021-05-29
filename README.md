@@ -3,7 +3,7 @@
 
 - [About](#about)
 - [Benefit](#benefits)
-- [Use Case](#use case)
+- [Use cases](#use-case)
 - [Components](#components)
 - [Setup](#setup)
 - [Info](#info)
@@ -22,7 +22,7 @@ Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part
 - Reliability
 - provide Streaming & Batching
 
-## Use Case
+## Use-cases
 - Asynchronous Messaging
 - Realtime Stream Processing
 - Logging & Monitoring

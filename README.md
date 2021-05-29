@@ -39,8 +39,8 @@ Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part
 - Logs (Physical files) are used for storing data and managed by Broker. Logs are multiple files and pruned periodically
 
 ## Setup
-### [Kafka](https://github.com/yuyatinnefeld/kafka/tree/master/docker)
-### [Java](https://github.com/yuyatinnefeld/kafka)
+### [Kafka](https://github.com/yuyatinnefeld/kafka/tree/master/kafka)
+### [Java](https://github.com/yuyatinnefeld/kafka/tree/master/java)
 ### [Scala](https://github.com/yuyatinnefeld/kafka/tree/master/scala)
 ### [Python](https://github.com/yuyatinnefeld/kafka/tree/master/python)
 

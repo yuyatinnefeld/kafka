@@ -1,30 +1,43 @@
+# Kafka Setup
+In this project you can configure kafka with homebrew or with docker.
 
-## Initial Kafka Setup with Docker
+- Setup with Docker ([Link](#Docker))
+- Setup with kafka ([Link](#Homebrew))
 
-### run kafka with docker-compose
+# Docker
 
-> docker-compose -f kafka-single-node.yml up -d
+## kafka Initial Setup
+
+### kafka docker run
+```bash
+docker-compose -f kafka-single-node.yml up -d
+```
 
 check the containers (kafka-broker, zookeeper)
-> docker ps
+```bash
+docker ps
+```
+###k afka docker shut down
 
-To shut down and remove the setup, execute this command in the same directory
-> docker-compose -f kafka-single-node.yml down
+execute this command in the same directory
+```bash
+docker-compose -f kafka-single-node.yml down
+```
 
-### Logging into the Kafka Broker Container
-> docker exec -it kafka-broker /bin/bash
+### logging into the kafka broker container
+```bash
+docker exec -it kafka-broker /bin/bash
+cd /opt/bitnami/kafka/bin
+```
 
-> cd /opt/bitnami/kafka/bin
-
-### Create topics
-
-
+### create topics
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
             --create \
             --topic kafka.learning.tweets \
             --partitions 1 \
             --replication-factor 1
+
 
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
@@ -33,8 +46,7 @@ To shut down and remove the setup, execute this command in the same directory
             --partitions 1 \
             --replication-factor 1
 
-
-###Check the created topics and their deteils
+### check the created topics and their details
 
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
@@ -44,21 +56,22 @@ To shut down and remove the setup, execute this command in the same directory
             --zookeeper zookeeper:2181 \
             --describe
 
-###Publishing Messages to Topics
+### publishing messages to topic
 
         ./kafka-console-producer.sh \
             --bootstrap-server localhost:29092 \
             --topic kafka.learning.tweets
 
 + Write Message
-
+```bash
 > this is my first tweet!
 > this is my second tweet!
+```
 
-
-###Consuming Messages from Topics
+### consuming Messages from Topics
 
 + Open another terminal tab
+
 
         ./kafka-console-consumer.sh \
             --bootstrap-server localhost:29092 \
@@ -66,61 +79,73 @@ To shut down and remove the setup, execute this command in the same directory
             --from-beginning
 
 
-Deleting Topics
++ Deleting Topics
+
 
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
             --delete \
             --topic kafka.learning.alerts
 
+## Check Component Setups
 
-## Kafka Configuration Check
-
-#### open Zookeeper setup
+### zookeeper setup
+```bash
 docker exec -it zookeeper /bin/bash
 cd /opt/bitnami/zookeeper/bin
 ./zkCli.sh
+```
 
-#### check Zookeeper components
-
+### zookeeper components
+```bash
 ls /
 ls /brokers
 ls /brokers/topics
 ls /brokers/ids
+```
 
-#### check Broker details
+### broker details
+```bash
 get /brokers/ids/<BROKER-ID>
 
 ex.
 get /brokers/ids/1001
+```
 
-#### check Topic details
+### topic details
+```bash
 get /brokers/topics/<TOPIC-ID>
 
 ex.
 get /brokers/topics/kafka.learning.tweets
+```
 
-escape the detail window
-quit
+escape the zookeeper window
+```bash
+> quit
+```
 
-#### check Server.properties details
-> docker exec -it kafka-broker /bin/bash
-
+### server.properties details
+```bash
+docker exec -it kafka-broker /bin/bash
 cat /opt/bitnami/kafka/config/server.properties
+```
 
-#### check Consumers & Logs
-
+### consumers & logs
+```bash
 cd /bitnami/kafka/data
 ls
 cd kafka.learning.tweets-0
 cat 00000000000000000000.log
-
+```
 
 ## Kafka Partition & Groups
 
-###Create a Topic with multiple partitions
+### create a topic with multiple partitions
 
-> cd /opt/bitnami/kafka/bin
+```bash
+cd /opt/bitnami/kafka/bin
+```
 
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
@@ -129,14 +154,14 @@ cat 00000000000000000000.log
             --partitions 3 \
             --replication-factor 1
 
-###Check topic partitioning
+### check topic partitioning
 
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
             --topic kafka.learning.orders \
             --describe
 
-### Publishing Messages to Topics with keys
+### publishing messages to topics with keys
 
         ./kafka-console-producer.sh \
             --bootstrap-server localhost:29092 \
@@ -150,16 +175,19 @@ cat 00000000000000000000.log
 ```
 
 ### Check the data in the 3 partition logs
+```bash
 cd /bitnami/kafka/data
 ls kafka.learning.orders*
 cat kafka.learning.orders-0/00000000000000000000.log
 cat kafka.learning.orders-1/00000000000000000000.log
 cat kafka.learning.orders-2/00000000000000000000.log
+```
 
 ### Check consuming partition data
-
-> docker exec -it kafka-broker /bin/bash
-> cd /opt/bitnami/kafka/bin
+```bash
+docker exec -it kafka-broker /bin/bash
+cd /opt/bitnami/kafka/bin
+```
 
 
 Tab1: Producer (Publishing Messages to Topics with keys)
@@ -190,7 +218,7 @@ Tab3: Consumer2 (with Consumer Group)
             --property key.separator=" = " \
             --from-beginning
 
-BILD
+![GitHub Logo](/images/topic-group.png)
 
 
 Tab4: Check current status of offsets
@@ -209,3 +237,44 @@ test-consumer-group kafka.learning.orders 0          3               3          
 test-consumer-group kafka.learning.orders 1          5               5               0               consumer-test-consumer-group-1-0c62d42f-53d3-4ae4-a0f4-c9d8a5ccc81a /172.18.0.3     consumer-test-consumer-group-1
 test-consumer-group kafka.learning.orders 2          3               3               0               consumer-test-consumer-group-1-66f616e7-6ced-45c9-b69b-4b2d677e1db1 /172.18.0.3     consumer-test-consumer-group-1
 ```
+
+
+## Homebrew
+
+### install kafka
+```bash
+brew install kafka
+```
+
+### start zookeeper-server
+```bash
+zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
+```
+### start kafka-server
+```bash
+kafka-server-start /usr/local/etc/kafka/server.properties
+```
+### create kafka topic (my example => topicYY)
+```bash
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicYY
+```
+### initialize Producer console:
+```bash
+kafka-console-producer --broker-list localhost:9092 --topic topicYY
+>hallo
+>konnichiwa
+>domo
+>hallo
+>you
+```
+### initialize consumer console:
+
+```bash
+kafka-console-consumer --bootstrap-server localhost:9092 --topic topicYY --from-beginning
+hallo
+>konnichiwa
+>domo
+>hallo
+>you
+```
+

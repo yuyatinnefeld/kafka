@@ -2,30 +2,37 @@
 <h2>🐍 Table of Contents 🐍</h2>
 
 - [About](#about)
-- [Benefit](#benefit)
+- [Benefit](#benefits)
+- [Components](#components)
 - [Info](#info)
-- [Kafka](#kafka)
-- [Scala](#scala)
-- [Python](#python)
-- [Functions](#functions)
+- [Setup](#setup)
 
-<h2>⚡ About ⚡ </h2>
+## About
+...
 
-## Benefit
-Scala
-Python
+## Benefits
+...
+
+## Components
+...
 
 ## Info
 - https://kafka.apache.org
 - https://dzone.com/articles/hands-on-apache-kafka-with-scala
 - https://medium.com/@Ankitthakur/apache-kafka-installation-on-mac-using-homebrew-a367cdefd273
 - https://pypi.org/project/kafka-python/
+- https://www.confluent.io/what-is-apache-kafka
 
-## Kafka
-### 0. install kafka
-```bash
-brew install kafka
-```
+
+## Setup
+### Docker
+### Java
+### Scala
+### Python
+
+
+## Example Code
+
 ### 1. start zookeeper-server
 ```bash
 zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
@@ -58,62 +65,3 @@ hallo
 >you
 ```
 
-## Scala
-### 0. create project structure
-```bash
-- myapp
-    - project
-        - build.properties
-    - src
-        - main
-            - scala
-                - Main.scala
-    - build.sbt
-```
-
-### 1. add env setup in built.sbt
-
-```scala
-name := "kafka-sbt"
-
-version := "0.1"
-
-scalaVersion := "2.12.10"
-
-libraryDependencies ++= Seq(
-  "org.apache.kafka" % "kafka-clients" % "2.7.0",
-  "org.apache.spark" %% "spark-core" % "3.0.0"
-)
-
-name := "kafka-scala"
-organization := "yuyatinnefeld-scala"
-version := "1.0"
-```
-
-### 2. build the project
-
-### 3. run the project
-
-```bash
-sbt
-run 
-```
-## Python
-
-### 0. activate venv
-```bash
-python -m venv venv
-source ./venv/bin/activate (Mac) or venv\Scripts\activate (Windows)
-```
-
-### 1. install the packages
-
-```bash
-pip install kafka-python
-```
-
-### 2. run the main.py
-
-```bash
-python python/main.py
-```

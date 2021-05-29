@@ -3,18 +3,46 @@
 
 - [About](#about)
 - [Benefit](#benefits)
+- [Use Case](#use case)
 - [Components](#components)
-- [Info](#info)
 - [Setup](#setup)
+- [Info](#info)
 
 ## About
-...
+Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part of Big Data solution.
+
+![GitHub Logo](/images/kafka-concept.png)
 
 ## Benefits
-...
+- Decoupling of publishers and subscribers (easy management & change)
+- Scaling (N+1)
+- Low Latency and high throughput
+- Fault Tolerance
+- Back-pressure handling
+- Reliability
+- provide Streaming & Batching
+
+## Use Case
+- Asynchronous Messaging
+- Realtime Stream Processing
+- Logging & Monitoring
+- Event Sourcing
+- Realtime Analytics
 
 ## Components
-...
+- Publishers (Producers) push message to Kafka
+- Consumers (Subscribers) listen and receive messages and provide offset management
+- Broker (Kafka Cluster/Instance) receives messages and store replicated within the cluster. Broker handles all requests from clients (produce, consume, and metadata)
+- Zookeeper Keeps the state of the cluster (brokers, topics, users).
+- Topics are category/feed name to which records are stored and published
+- Messages (Events) is unit of Data (Row, record, Map, Blob)
+- Logs (Physical files) are used for storing data and managed by Broker. Logs are multiple files and pruned periodically
+
+## Setup
+### [Kafka](https://github.com/yuyatinnefeld/kafka/tree/master/docker)
+### [Java](https://github.com/yuyatinnefeld/kafka)
+### [Scala](https://github.com/yuyatinnefeld/kafka/tree/master/scala)
+### [Python](https://github.com/yuyatinnefeld/kafka/tree/master/python)
 
 ## Info
 - https://kafka.apache.org
@@ -22,46 +50,3 @@
 - https://medium.com/@Ankitthakur/apache-kafka-installation-on-mac-using-homebrew-a367cdefd273
 - https://pypi.org/project/kafka-python/
 - https://www.confluent.io/what-is-apache-kafka
-
-
-## Setup
-### Docker
-### Java
-### Scala
-### Python
-
-
-## Example Code
-
-### 1. start zookeeper-server
-```bash
-zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
-```
-### 2. start kafka-server
-```bash
-kafka-server-start /usr/local/etc/kafka/server.properties
-```
-### 3. create kafka topic (my example => topicYY)
-```bash
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicYY
-```
-### 4. initialize Producer console:
-```bash
-kafka-console-producer --broker-list localhost:9092 --topic topicYY
->hallo
->konnichiwa
->domo
->hallo
->you
-```
-### 5. initialize consumer console:
-
-```bash
-kafka-console-consumer --bootstrap-server localhost:9092 --topic topicYY --from-beginning
-hallo
->konnichiwa
->domo
->hallo
->you
-```
-

@@ -1,8 +1,18 @@
+# Scala
 
-## Scala
 ### 0. create project structure
 ```bash
-- myapp
+sbt new sbt/scala-seed.g8
+name [My Something Project]: my-app
+....
+$ cd hello
+$ sbt
+...
+> run
+```
+you can see the following project structure
+```bash
+- my-app
     - project
         - build.properties
     - src
@@ -12,7 +22,7 @@
     - build.sbt
 ```
 
-### 1. add env setup in built.sbt
+### 1. update built.sbt
 
 ```scala
 name := "kafka-sbt"
@@ -32,6 +42,9 @@ version := "1.0"
 ```
 
 ### 2. build the project
+```bash
+sbt package
+```
 
 ### 3. run the project
 

@@ -17,7 +17,7 @@ check the containers (kafka-broker, zookeeper)
 ```bash
 docker ps
 ```
-###k afka docker shut down
+### kafka docker shut down
 
 execute this command in the same directory
 ```bash

@@ -1,4 +1,4 @@
-## Python
+# Python Setup
 
 ### 0. activate venv
 ```bash

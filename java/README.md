@@ -1,20 +1,35 @@
 # Java Env Setup
 
 ###1. maven project start
+```bash
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
 
-###2. add dependency & plugin
+cd my-app
+
+mvn package
+
+java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+
+```
+
+###2. update dependency
+```xml
 
     <dependency>
     <groupId>io.netty</groupId>
     <artifactId>netty-common</artifactId>
     <version>4.1.65.Final</version>
     </dependency>
+    
     <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka_2.13</artifactId>
       <version>2.7.0</version>
     </dependency>
 
+```
+###3. udpate plugin
+```xml
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -26,9 +41,23 @@
           </configuration>
         </plugin>
 
+```
 
-###3. add kafka programs
+###4. add kafka programs
+```bash
+mkdir /kafka/java/my-app/src/main/java/com/simple.kafka
+cd /kafka/java/my-app/src/main/java/com/simple.kafka
+touch KafkaSimpleConsumer.java
+touch KafkaSimpleProducer.java
+```
 
-###4. project structure > product language level = 8
+###5. setup project structure of your IntelliJ
+- project SDK -> java
+- product language level = 8
 
-###5. mvn clean compile
+###6. mvn clean compile
+```bash
+mvn clean compile
+```
+
+###7. test run!

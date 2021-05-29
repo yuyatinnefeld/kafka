@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.simple.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -9,7 +9,8 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class KafkaUseCaseConsumer {
+public class KafkaSimpleConsumer {
+
     public static void main(String[] args) {
 
         //Setup Properties for consumer
@@ -41,7 +42,7 @@ public class KafkaUseCaseConsumer {
                 new KafkaConsumer<String,String>(kafkaProps);
 
         //Subscribe to the kafka.learning.orders topic
-        simpleConsumer.subscribe(Arrays.asList("kafka.usecase.students"));
+        simpleConsumer.subscribe(Arrays.asList("kafka.learning.orders"));
 
         //Continuously poll for new messages
         while(true) {

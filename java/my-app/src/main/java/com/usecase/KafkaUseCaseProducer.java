@@ -1,4 +1,4 @@
-package com.mycompany.app;
+package com.usecase;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -7,7 +7,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.util.Properties;
 import java.util.Random;
 
-public class KafkaSimpleProducer {
+
+public class KafkaUseCaseProducer {
 
     public static void main(String[] args) {
 
@@ -16,15 +17,15 @@ public class KafkaSimpleProducer {
 
         //List of brokers to connect to
         kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                            "localhost:9092");
+                "localhost:9092");
 
         //Serializer class used to convert Keys to Byte Arrays
         kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                            "org.apache.kafka.common.serialization.StringSerializer");
+                "org.apache.kafka.common.serialization.StringSerializer");
 
         //Serializer class used to convert Messages to Byte Arrays
         kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                            "org.apache.kafka.common.serialization.StringSerializer");
+                "org.apache.kafka.common.serialization.StringSerializer");
 
         //Create a Kafka producer from configuration
         KafkaProducer simpleProducer = new KafkaProducer(kafkaProps);
@@ -39,9 +40,9 @@ public class KafkaSimpleProducer {
                 //Create a producer Record
                 ProducerRecord<String,String> kafkaRecord =
                         new ProducerRecord<String,String>(
-                                "kafka.learning.orders",    //Topic name
+                                "kafka.usecase.students",    //Topic name
                                 String.valueOf(i),          //Key for the message
-                                "This is order" + i         //Message Content
+                                "This is student " + i         //Message Content
                         );
 
                 System.out.println("Sending Message : "+ kafkaRecord.toString());

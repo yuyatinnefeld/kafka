@@ -1,0 +1,25 @@
+
+1. create a new topic
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --create \
+            --topic kafka.learning.orders \
+            --partitions 2 \
+            --replication-factor 1
+
+
+2. run producer
+
+             ./kafka-console-producer.sh \
+             --bootstrap-server localhost:29092 \
+             --topic kafka.learning.orders
+
+
+3. run consumer
+
+             ./kafka-console-consumer.sh \
+             --bootstrap-server localhost:29092 \
+             --topic kafka.learning.orders \
+             --from-beginning
+

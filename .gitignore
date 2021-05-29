@@ -2,9 +2,7 @@
 *.log
 *.zip
 *.gz
-*.jpeg
-*.jpg
-*.png
+
 *~
 
 # sbt specific

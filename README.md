@@ -1,9 +1,9 @@
 <h1 align="center">Kafka Data Streaming </h1> <br>
-<h2>🐍 Table of Contents 🐍</h2>
+<h2> Table of Contents </h2>
 
 - [About](#about)
 - [Benefit](#benefits)
-- [Use cases](#use-case)
+- [Use-cases](#use-case)
 - [Components](#components)
 - [Setup](#setup)
 - [Info](#info)

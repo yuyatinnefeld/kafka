@@ -1,8 +1,9 @@
 # Kafka Setup
 In this project you can configure kafka with homebrew or with docker.
 
-- Setup with Docker ([Link](#Docker))
+- Setup with Single Node Docker ([Link](#Docker))
 - Setup with kafka ([Link](#Homebrew))
+- Setup with Multiple Nodes Docker ([Link](#Docker2))
 
 # Docker
 
@@ -278,3 +279,69 @@ hallo
 >you
 ```
 
+# Docker2
+
+## kafka Initial Setup for Cluster
+```bash
+docker-compose -f kafka-cluster.yml up -d
+```
+
+## Open Kafka Cluster Manager Site "Kafdrop"
+localhost:9000
+
+
+### kafka docker shut down
+
+execute this command in the same directory
+```bash
+docker-compose -f kafka-cluster.yml down
+```
+
+### create a topic by Kafdrop
+
+![GitHub Logo](/images/create_topic.png)
+
+create topics
+![GitHub Logo](/images/create_topic2.png)
+![GitHub Logo](/images/create_topic3.png)
+
+### Check the Kafdrop UI
+step1
+- run com.multiplenodes.simple.KafkaProducer
+- open > http://localhost:9000/topic/kafka.learning.orders 
+- Consumers > Group ID = kafka-java-consumer
+- Combined Lag = 0
+
+![GitHub Logo](/images/groupid.png)
+
+step2
+- run com.multiplenodes.simple.KafkaProducer
+- open > http://localhost:9000/topic/kafka.learning.orders
+- Consumers > Group ID = kafka-java-consumer
+- Combined Lag = 20
+
+step3
+- restart com.multiplenodes.simple.KafkaSimpleConsumer
+- open > http://localhost:9000/topic/kafka.learning.orders
+- Consumers > Group ID = kafka-java-consumer
+- Combined Lag = 0
+
+### Recover Simulation
+step1
+- run com.multiplenodes.simple.KafkaProducer
+- open > http://localhost:9000/topic/kafka.learning.orders
+
+![GitHub Logo](/images/recover1.png)
+  
+```bash
+docker container stop kafka-broker3
+```
+
+leader broker switched
+![GitHub Logo](/images/recover2.png)
+
+```bash
+docker container start kafka-broker3
+```
+leader broker 1003 reactivated
+![GitHub Logo](/images/recover3.png)

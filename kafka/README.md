@@ -332,7 +332,8 @@ step1
 - open > http://localhost:9000/topic/kafka.learning.orders
 
 ![GitHub Logo](/images/recover1.png)
-  
+
+Stop the kafka broker3
 ```bash
 docker container stop kafka-broker3
 ```
@@ -340,6 +341,7 @@ docker container stop kafka-broker3
 leader broker switched
 ![GitHub Logo](/images/recover2.png)
 
+Restart the kafka broker3
 ```bash
 docker container start kafka-broker3
 ```

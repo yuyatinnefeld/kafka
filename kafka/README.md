@@ -255,11 +255,39 @@ zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties
 ```bash
 kafka-server-start /usr/local/etc/kafka/server.properties
 ```
-### create kafka topic (my example => topicYY)
+### create kafka topic 
 ```bash
-kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic topicYY
+kafka-topics --create --zookeeper <HOST:PORT> --replication-factor <1-N> --partitions <1-N> --topic <TOPIC_NAME>
 ```
-### initialize Producer console:
+* topic name is NOT allowed with "-" for example. topic-YY, My-Topic
+* replication-factor is less than available BROKER number
+
+example: host:port = localhost:2181, replication-factor = 1, partition = 1 topic_name = topicYY
+
+```bash
+kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic topicYY
+```
+
+```bash
+kafka-topics --zookeeper localhost:2181 --topic --list
+```
+
+```bash
+kafka-topics --zookeeper localhost:2181 --topic topicYY --describe
+```
+
+### delete kafka topic
+```bash
+kafka-topics --zookeeper <HOST:PORT> --topic <TOPIC_NAME> --delete
+```
+
+
+### initialize Producer:
+```bash
+kafka-console-producer --broker-list <HOST:PORT> --topic <TOPIC_NAME> [--producer-property acks=<ACKS-TYPE>]
+```
+
+
 ```bash
 kafka-console-producer --broker-list localhost:9092 --topic topicYY
 >hallo
@@ -268,7 +296,12 @@ kafka-console-producer --broker-list localhost:9092 --topic topicYY
 >hallo
 >you
 ```
-### initialize consumer console:
+### initialize Consumer:
+```bash
+kafka-console-consumer --bootstrap-server <HOST:PORT> --topic <TOPIC_NAME> [--from-beginning] [--group <GROUP-NAME>]
+```
+--from-beginning => read message from beginning. without this only reading Realtime data.
+
 
 ```bash
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topicYY --from-beginning

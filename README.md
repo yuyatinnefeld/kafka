@@ -23,6 +23,7 @@ Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part
 - provide Streaming & Batching
 
 ## Use-cases
+![GitHub Logo](/images/bigdata.png)
 - Asynchronous Messaging
 - Realtime Stream Processing
 - Logging & Monitoring

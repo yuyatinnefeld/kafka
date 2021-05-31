@@ -12,6 +12,10 @@ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
 
 ```
 
+or 
+
+just initial create by IntelliJ
+
 ###2. update dependency
 ```xml
 
@@ -28,6 +32,27 @@ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
     </dependency>
 
 ```
+
+or
+
+
+```xml
+        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-clients</artifactId>
+    <version>2.8.0</version>
+</dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>1.7.25</version>
+</dependency>
+
+```
+
 ###3. udpate plugin
 ```xml
 

@@ -347,3 +347,4 @@ docker container start kafka-broker3
 ```
 leader broker 1003 reactivated
 ![GitHub Logo](/images/recover3.png)
+

@@ -1,4 +1,4 @@
-package com.multiplenodes.simple;
+package com.multiple_nodes.simple;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

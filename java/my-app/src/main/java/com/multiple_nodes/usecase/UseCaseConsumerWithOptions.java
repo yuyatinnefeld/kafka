@@ -1,4 +1,4 @@
-package com.single_node.usecase;
+package com.multiple_nodes.usecase;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -9,8 +9,8 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
+public class UseCaseConsumerWithOptions {
 
-public class KafkaUseCaseConsumer {
     public static void main(String[] args) {
 
         //Setup Properties for consumer
@@ -18,7 +18,7 @@ public class KafkaUseCaseConsumer {
 
         //List of Kafka brokers to connect to
         kafkaProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092");
+                "localhost:9092,localhost:9093,localhost:9094");
 
         //Deserializer class to convert Keys from Byte Array to String
         kafkaProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
@@ -37,25 +37,47 @@ public class KafkaUseCaseConsumer {
         kafkaProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,
                 "earliest");
 
+        /**********************************************************************
+         *                  Set Batching Parameters
+         **********************************************************************/
+
+        //Set min bytes to 10 bytes
+        kafkaProps.put(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, 20);
+
+        //Set max wait timeout to 100 ms
+        kafkaProps.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 200);
+
+        /**********************************************************************
+         *                  Set Autocommit Parameters
+         **********************************************************************/
+
+        //Set auto commit to false
+        kafkaProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
         //Create a Consumer
-        KafkaConsumer<String, String> simpleConsumer =
-                new KafkaConsumer<String,String>(kafkaProps);
+        KafkaConsumer<String, String> usecaseConsumer =
+                new KafkaConsumer<String, String>(kafkaProps);
 
         //Subscribe to the kafka.learning.orders topic
-        simpleConsumer.subscribe(Arrays.asList("kafka.usecase.students"));
+        usecaseConsumer.subscribe(Arrays.asList("kafka.usecase.students"));
 
         //Continuously poll for new messages
         while(true) {
 
             //Poll with timeout of 100 milli seconds
             ConsumerRecords<String, String> messages =
-                    simpleConsumer.poll(Duration.ofMillis(100));
+                    usecaseConsumer.poll(Duration.ofMillis(100));
 
             //Print batch of records consumed
-            for (ConsumerRecord<String, String> message : messages)
+            for (ConsumerRecord<String, String> message : messages) {
                 System.out.println("Message fetched : " + message);
-        }
+            }
 
+            /**********************************************************************
+             *                  Do Manual commit asynchronously
+             **********************************************************************/
+            usecaseConsumer.commitAsync();
+        }
 
 
     }

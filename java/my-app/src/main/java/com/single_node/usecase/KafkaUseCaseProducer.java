@@ -1,4 +1,4 @@
-package com.usecase;
+package com.single_node.usecase;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

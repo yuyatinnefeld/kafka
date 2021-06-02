@@ -131,7 +131,7 @@ Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part
 - Acknowledgment Values
 - ACKs = 0 (Producer won't wait for acknowledgment. possible data loss)
 - ACKs = 1 (default / Producer waits for leader acknowledgment. limited data loss)
-- ACKs = all (all in-sync replicas should receive the leader acknowledgment. no data loss)
+- ACKs = -1 (all in-sync replicas should receive the leader acknowledgment. no data loss)
 
 ### Producer parameters
 - BUFFER.MEMORY = memory in bytes
@@ -159,6 +159,18 @@ Kafka is events/message streaming (Pub/Sub) platform and one of the crucial part
 - receives heartbeats form consumers
 - triggers are rebalanced if heartbeats stop
 
+
+### Safe Producer
+
+#### Kafka > 0.11
+- enable.idempotence=true (producer level) + min.insync.replica=2 (broker/topic level)
+
+
+#### Kafka < 0.11
+- ACKs = all (producer level)
+- min.insync.replica=2 (broker/topic level)
+- retries=MAX_INT (producer level)
+- max.in.flight.requests.per.connection =1 (producer level)
 
 
 

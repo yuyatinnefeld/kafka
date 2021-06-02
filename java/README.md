@@ -53,7 +53,7 @@ or
 
 ```
 
-###3. udpate plugin
+###3. update plugin
 ```xml
 
         <plugin>

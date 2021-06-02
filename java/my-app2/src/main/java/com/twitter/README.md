@@ -8,7 +8,7 @@
 
 ## modify the TwitterAPI Config
 ```bash
-cd /../path/conf/app.config
+cd /..your_project_path.../conf/app.config
 ```
 
 consumerKey=xxxxxxxxxxxxxxx

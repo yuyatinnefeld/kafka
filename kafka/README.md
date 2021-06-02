@@ -39,12 +39,18 @@ cd /opt/bitnami/kafka/bin
             --partitions 1 \
             --replication-factor 1
 
-
         ./kafka-topics.sh \
             --zookeeper zookeeper:2181 \
             --create \
             --topic kafka.learning.alerts \
             --partitions 1 \
+            --replication-factor 1
+
+        ./kafka-topics.sh \
+            --zookeeper zookeeper:2181 \
+            --create \
+            --topic twitter_status_connect \
+            --partitions 3 \
             --replication-factor 1
 
 ### check the created topics and their details
